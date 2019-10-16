@@ -29,7 +29,7 @@
     <h1>Captive portal</h1>
     <h6>Login to gain access to internet</h6>
     <!-- Login Form -->
-    <form method="post">
+    <form method="get" action="$authaction">
       <div class="form-group">
         <label for="name"><b>Name:<b></label>
         <input type="name" class="form-control" id="inputName" placeholder="Name on ticket" required>
@@ -43,7 +43,7 @@
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1"><small>I accept the terms and service</small></label>
       </div>
-      <button style="margin-bottom: 1em; " type="submit" class="btn btn-primary">Submit</button>
+      <button style="margin-bottom: 1em; " value="Continue" type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
   <!-- Button to Open the Modal -->
@@ -58,13 +58,16 @@
 
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
+          <h4 class="modal-title">Help</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
         <!-- Modal body -->
         <div class="modal-body">
-          Modal body..
+          <h5><b>Why can't I access internet?</b></h5>
+          <h5><b>Where can I find my ticketnumber?</b></h5>
+          <h5><b>....</b></h5>
+          <h5><b>....</b></h5>
         </div>
 
         <!-- Modal footer -->
