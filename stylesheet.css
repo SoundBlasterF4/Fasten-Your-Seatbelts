@@ -32,3 +32,6 @@ margin-left: 1em;
   background-color: #d81e05;
   border-color: #007bff;
 }
+.btnhelp:hover{
+  background-color: #f12106 ;
+}
