@@ -10,18 +10,73 @@
 <!-- Bootstrap framework has been used -->
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="shorcut-icon" href="image/icon/favicon.ico">
-  <title>Corendon Captive Portal</title>
-  <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
-  <link rel="stylesheet" href="stylesheet.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="script/slide.js" type="text/javascript"></script>
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="shorcut-icon" href="image/icon/favicon.ico">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="script/slide.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+<link rel="shortcut icon" href="/images/splash.jpg" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
 
+<title>$gatewayname Captive Portal.</title>
+
+<!--
+Content:
+        Nodogsplash (NDS), by default, serves this splash page (splash.html)
+        when a client device Captive Portal Detection (CPD) process
+        attempts to send a port 80 request to the Internet.
+
+        You may either embed css in this file or use a separate .css file
+        in the same directory as this file, as demonstrated here.
+
+        It should be noted when designing a custom splash page
+        that for security reasons many CPD implementations:
+                Immediately close the browser when the client has authenticated.
+                Prohibit the use of href links.
+                Prohibit downloading of external files
+                        (including .css and .js).
+                Prohibit the execution of javascript.
+
+Authentication:
+        A client is authenticated on submitting an HTTP form, method=get,
+        passing $authaction, $tok and $redir.
+
+        It is also possible to authenticate using an href link to
+        $authtarget but be aware that many device Captive Portal Detection
+        processes prohibit href links, so this method may not work with
+        all client devices.
+
+Available variables:
+        error_msg: $error_msg
+        gatewayname: $gatewayname
+        tok: $tok
+        redir: $redir
+        authaction: $authaction
+        denyaction: $denyaction
+        authtarget: $authtarget
+        clientip: $clientip
+        clientmac: $clientmac
+        clientupload: $clientupload
+        clientdownload: $clientdownload
+        gatewaymac: $gatewaymac
+        nclients: $nclients
+        maxclients: $maxclients
+        uptime: $uptime
+
+Additional Variables that can be passed back via the HTTP get,
+or appended to the query string of the authtarget link:
+        username
+        password
+-->
+
+</head>
 <body>
   <!-- box containing captive portal -->
   <div class="container">
@@ -36,14 +91,16 @@
       </div>
       <div class="form-group">
         <label for="ticketNumber"><b>Ticket Number:<b></label>
-        <input type="ticket" class="form-control" id="ticketNumber" aria-describedby="ticketHelp" placeholder="Enter ticket number" required>
+        <input type="text" class="form-control" id="ticketNumber" aria-describedby="ticketHelp" placeholder="Enter ticket number" required>
         <small id="ticketHelp" class="form-text text-muted">We'll never share your info with someone else</small>
       </div>
       <div class="form-group form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1"><small>I accept the terms and service</small></label>
       </div>
-      <button style="margin-bottom: 1em; " value="Continue" type="submit" class="btn btn-primary">Submit</button>
+      <input type="hidden" name="tok" value="$tok">
+      <input type="hidden" name="redir" value="$redir">
+      <input style="margin-bottom: 1em;" type="submit"  value="Continue" class="btn btn-primary">
     </form>
   </div>
   <!-- Button to Open the Modal -->
