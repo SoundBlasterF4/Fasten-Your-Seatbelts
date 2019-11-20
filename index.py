@@ -17,7 +17,7 @@ def application(environ, start_response):
 
     html += '<head> \n'
     html += '<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> \n'
-    html += '<link rel="shorcut-icon" href="image/icon/favicon.ico"> \n'
+    html += '<link rel="shorcut-icon" href="../html/image/icon/favicon.ico"> \n'
     html += '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"> \n '
     html += '<meta http-equiv="Pragma" content="no-cache"> \n'
     html += '<meta http-equiv="Expires" content="0"> \n '
@@ -25,11 +25,11 @@ def application(environ, start_response):
     html += '<meta name="viewport" content="width=device-width, initial-scale=1.0"> \n'
     html += '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> \n'
     html += '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> \n'
-    html += '<script src="js/bootstrap.min.js"></script> \n'
-    html += '<script src="script/slide.js" type="text/javascript"></script> \n'
-    html += '<link rel="stylesheet" href="css/bootstrap.css" type="text/css"> \n'
-    html += '<link rel="shortcut icon" href="/images/splash.jpg" type="image/x-icon"> \n'
-    html += '<link rel="stylesheet" type="text/css" href="stylesheet.css"> \n'
+    html += '<script src="../html/js/bootstrap.min.js"></script> \n'
+    html += '<script src="../html/script/slide.js" type="text/javascript"></script> \n'
+    html += '<link rel="stylesheet" href="../html/css/bootstrap.css" type="text/css"> \n'
+    html += '<link rel="shortcut icon" href="../html/images/splash.jpg" type="image/x-icon"> \n'
+    html += '<link rel="stylesheet" type="text/css" href="../html/style.css"> \n'
 
     html += '<title>$gatewayname Captive Portal.</title> \n'
 
@@ -81,7 +81,7 @@ def application(environ, start_response):
     html +=  '<!-- box containing captive portal --> \n'
 
     html +=  '<div class="container"> \n'
-    html +=    '<img style="margin-top:1em; " src="image/Logo_Coredon.png" width="100%"> \n'
+    html +=    '<img style="margin-top:1em; " src="../html/image/Logo_Coredon.png" width="100%"> \n'
     html +=    '<h1>Captive portal</h1> \n'
     html +=    '<h6>Login to gain access to internet</h6> \n'
     html +=    '<!-- Login Form --> \n'
@@ -90,13 +90,6 @@ def application(environ, start_response):
     html +=        '<label for="name"><b>Name:<b></label> \n'
     html +=        '<input type="name" class="form-control" id="inputName" placeholder="Name on ticket" required> \n'
     html += '<h6>Login to gain access to internet</h6>\n'
-
-    html += '<!-- Login Form -->\n'
-    html += '<form method="get" action="$authaction">\n'
-    html += '<div class="form-group">\n'
-    html += '<label for="name"><b>Name:<b></label>\n'
-    html += '<input type="name" class="form-control" id="inputName" placeholder="Name on ticket" required>\n'
-    html += '</div>\n'
 
     html += '<div class="form-group">\n'
     html += '<label for="ticketNumber"><b>Ticket Number:<b></label>\n'
