@@ -1,3 +1,12 @@
+import mysql.connector as mariadb
+mariadb_connection = mariadb.connect(user='anonymous', password='corendon', database='corendon')
+cursor = mariadb_connection.cursor()
+try:
+    cursor.execute("SELECT * FROM Passengers")
+except mariadb.Error as error:
+    print("Error: {}".format(error))
+data = cursor.fetchall()
+
 def application(environ, start_response):
     status = '200 OK'
     response_header = [('Content-type', 'text/html')]
@@ -31,8 +40,8 @@ def application(environ, start_response):
     html += '<link rel="shortcut icon" href="../html/images/splash.jpg" type="image/x-icon"> \n'
     html += '<link rel="stylesheet" type="text/css" href="../html/style.css"> \n'
 
+    html += str(data)
     html += '<title>$gatewayname Captive Portal.</title> \n'
-
     html += '<!-- \n'
     html += 'Content: \n'
     html +=        'Nodogsplash (NDS), by default, serves this splash page (splash.html) \n'
@@ -89,7 +98,7 @@ def application(environ, start_response):
     html +=      '<div class="form-group"> \n'
     html +=        '<label for="name"><b>Name:<b></label> \n'
     html +=        '<input type="name" class="form-control" id="inputName" placeholder="Name on ticket" required> \n'
-    html += '<h6>Login to gain access to internet</h6>\n'
+
 
     html += '<div class="form-group">\n'
     html += '<label for="ticketNumber"><b>Ticket Number:<b></label>\n'
@@ -142,6 +151,6 @@ def application(environ, start_response):
 
     return [bytes(html, 'utf-8')]
 
-if __name__ == '__main__':
+if _name_ == '_main_':
      page = application({}, print)
      print(page[0].decode())
