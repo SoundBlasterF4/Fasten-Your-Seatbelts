@@ -64,6 +64,18 @@ def application(environ, start_response):
     querry = "SELECT * FROM Passengers WHERE ticketnumber=" + "'" + ''.join(ticket) + "'" +" AND " + "firstname="+ "'" +''.join(name) + "'"
     html += str(querry)
 
+    try:
+     cursor.execute(querry)
+     fetch = cursor.fetchall()
+     count = cursor.rowcount
+     html += str(count)
+     if count == 1:
+      html += 'Login Success!'
+     else:
+      html += 'Login Fail1'
+    except mariadb.Error as error:
+     print("Error: {}".format(error))
+
     return [bytes(html, 'utf-8')]
 
 if __name__ == '__main__':
