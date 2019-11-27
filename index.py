@@ -52,20 +52,14 @@ def application(environ, start_response):
     html +=    '<h1>Captive portal</h1> \n'
     html +=    '<h6>Login to gain access to internet</h6> \n'
 
-    environmentVars = ['REQUEST_METHOD', 'REQUEST_URI', 'QUERY_STRING', 'SCRIPT_NAME', 'HTTP_REFERER']
-    for envVar in environmentVars:
-     envVarValue = environ.get(envVar, '')
-     html += envVar + ' = ' + envVarValue + '<br>\n'
-
     html +=    '<!-- Login Form --> \n'
-    html +=    '<form method="POST" action="#"> \n'
+    html +=    '<form method="POST" action="login.py"> \n'
     html +=      '<div class="form-group"> \n'
     html +=        '<label for="name"><b>Name:<b></label> \n'
-    html +=        '<input type="name" class="form-control" id="inputName" placeholder="Name on ticket" required> \n'
-
+    html +=        '<input type="name" class="form-control" id="inputName" name="inputName" placeholder="Name on ticket" required> \n'
     html += '<div class="form-group">\n'
     html += '<label for="ticketNumber"><b>Ticket Number:<b></label>\n'
-    html += '<input type="text" class="form-control" id="ticketNumber" aria-describedby="ticketHelp" placeholder="Enter ticket number" required>\n'
+    html += '<input type="text" class="form-control" id="ticketNumber" name="ticketNumber" aria-describedby="ticketHelp" placeholder="Enter ticket number" required>\n'
     html += '<small id="ticketHelp" class="form-text text-muted">Well never share your info with someone else </small> \n'
     html += '</div>\n'
 
@@ -78,18 +72,7 @@ def application(environ, start_response):
     html += '<input type="hidden" name="redir" value="$redir">\n'
     html += '<input style="margin-bottom: 1em;" type="submit"  value="Continue" class="btn btn-primary">\n'
     html += '</form>\n'
-
-    method = environ.get('REQUEST_METHOD', '')
-    params = {}
-
-    if method == 'GET':
-     params = urlparse.parse_qs(environ['QUERY_STRING'])
-    elif method == 'POST':
-     input = environ['wsgi.input'].read().decode()
-     params = urlparse.parse_qs(input)
     html += '</div>\n'
-    html += 'Userid: ' + params.get('inputName', [''])[0] + '<br>\n'
-    html += 'Password: ' + params.get('ticketNumber', [''])[0] + '<br>\n'
 
     html += '<!-- Button to Open the Modal -->\n'
     html += '<button type="button" class="modalbtn btnhelp" data-toggle="modal" data-target="#myModal">\n'
