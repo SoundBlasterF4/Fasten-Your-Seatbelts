@@ -58,9 +58,12 @@ def application(environ, start_response):
      input = environ['wsgi.input'].read().decode()
      params = urlparse.parse_qs(input)
     name = params.get('inputName')
-    password = params.get('ticketNumber')
+    ticket = params.get('ticketNumber')
     html += str(name)
-    html += str(password)
+    html += str(ticket)
+    querry = "SELECT * FROM Passengers WHERE ticketnumber=" + "'" + ''.join(ticket) + "'" +" AND " + "firstname="+ "'" +''.join(name) + "'"
+    html += str(querry)
+
     return [bytes(html, 'utf-8')]
 
 if __name__ == '__main__':
