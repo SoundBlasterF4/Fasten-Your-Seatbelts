@@ -47,7 +47,7 @@ def application(environ, start_response):
 
     html += str(data) #Hardcoded database show
 
-    html += '<title>$gatewayname Captive Portal.</title> \n'
+    html += '<title>Corendon Captive Portal.</title> \n'
     html += '</head> \n'
     html +=  '<body> \n'
 
