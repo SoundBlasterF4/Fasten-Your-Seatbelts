@@ -87,7 +87,7 @@ def application(environ, start_response):
       login = False
      #If value = True then redirect to the login other wise to back to login
      if login == True:
-        html += '<meta http-equiv="Refresh" content="2; url=succes.py" />'
+        html += '<meta http-equiv="Refresh" content="2; url=../html/htmlPage2.html" />'
      elif login == False:
          html += '<meta http-equiv="Refresh" content="2; url=index.py" />'
      else:
