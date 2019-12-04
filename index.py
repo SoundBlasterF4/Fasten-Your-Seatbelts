@@ -1,14 +1,10 @@
-import urllib.parse as urlparse
 import mysql.connector as mariadb
-
 mariadb_connection = mariadb.connect(user='anonymous', password='corendon', database='corendon')
 cursor = mariadb_connection.cursor()
-
 try:
     cursor.execute("SELECT * FROM Passengers")
 except mariadb.Error as error:
     print("Error: {}".format(error))
-
 data = cursor.fetchall()
 
 def application(environ, start_response):
@@ -45,25 +41,68 @@ def application(environ, start_response):
     html += '<link rel="stylesheet" type="text/css" href="../html/style.css"> \n'
 
     html += str(data)
-
     html += '<title>$gatewayname Captive Portal.</title> \n'
+    html += '<!-- \n'
+    html += 'Content: \n'
+    html +=        'Nodogsplash (NDS), by default, serves this splash page (splash.html) \n'
+    html +=        'when a client device Captive Portal Detection (CPD) process \n'
+    html +=        'attempts to send a port 80 request to the Internet. \n'
+    html +=        'You may either embed css in this file or use a separate .css file \n'
+    html +=        'in the same directory as this file, as demonstrated here. \n'
+    html +=        'It should be noted when designing a custom splash page \n'
+    html +=        'that for security reasons many CPD implementations: \n'
+    html +=                'Immediately close the browser when the client has authenticated. \n'
+    html +=                'Prohibit the use of href links. \n'
+    html +=                'Prohibit downloading of external files \n'
+    html +=                        '(including .css and .js). \n'
+    html +=                'Prohibit the execution of javascript. \n'
+    html += 'Authentication: \n'
+    html +=        'A client is authenticated on submitting an HTTP form, method=get, \n'
+    html +=        'passing $authaction, $tok and $redir. \n'
+    html +=        'It is also possible to authenticate using an href link to \n'
+    html +=        '$authtarget but be aware that many device Captive Portal Detection \n'
+    html +=        'processes prohibit href links, so this method may not work with \n'
+    html +=        'all client devices. \n'
+    html += 'Available variables: \n'
+    html +=        'error_msg: $error_msg \n'
+    html +=        'gatewayname: $gatewayname \n'
+    html +=        'tok: $tok \n'
+    html +=        'redir: $redir \n'
+    html +=        'authaction: $authaction \n'
+    html +=        'denyaction: $denyaction \n'
+    html +=        'authtarget: $authtarget \n'
+    html +=        'clientip: $clientip \n'
+    html +=        'clientmac: $clientmac \n'
+    html +=        'clientupload: $clientupload \n'
+    html +=        'clientdownload: $clientdownload \n'
+    html +=        'gatewaymac: $gatewaymac \n'
+    html +=        'nclients: $nclients \n'
+    html +=        'maxclients: $maxclients \n'
+    html +=        'uptime: $uptime \n'
+    html += 'Additional Variables that can be passed back via the HTTP get, \n'
+    html += 'or appended to the query string of the authtarget link: \n'
+    html +=        'username \n'
+    html +=        'password \n'
+    html += '--> \n'
+
     html += '</head> \n'
     html +=  '<body> \n'
-
     html +=  '<!-- box containing captive portal --> \n'
+
     html +=  '<div class="container"> \n'
     html +=    '<img style="margin-top:1em; " src="../html/image/Logo_Coredon.png" width="100%"> \n'
     html +=    '<h1>Captive portal</h1> \n'
     html +=    '<h6>Login to gain access to internet</h6> \n'
-
     html +=    '<!-- Login Form --> \n'
-    html +=    '<form method="POST" action="login.py"> \n'
+    html +=    '<form method="get" action="$authaction"> \n'
     html +=      '<div class="form-group"> \n'
     html +=        '<label for="name"><b>Name:<b></label> \n'
-    html +=        '<input type="name" class="form-control" id="inputName" name="inputName" placeholder="Name on ticket" required> \n'
+    html +=        '<input type="name" class="form-control" id="inputName" placeholder="Name on ticket" required> \n'
+
+
     html += '<div class="form-group">\n'
     html += '<label for="ticketNumber"><b>Ticket Number:<b></label>\n'
-    html += '<input type="text" class="form-control" id="ticketNumber" name="ticketNumber" aria-describedby="ticketHelp" placeholder="Enter ticket number" required>\n'
+    html += '<input type="text" class="form-control" id="ticketNumber" aria-describedby="ticketHelp" placeholder="Enter ticket number" required>\n'
     html += '<small id="ticketHelp" class="form-text text-muted">Well never share your info with someone else </small> \n'
     html += '</div>\n'
 
@@ -112,6 +151,6 @@ def application(environ, start_response):
 
     return [bytes(html, 'utf-8')]
 
-if __name__ == '__main__':
+if _name_ == '_main_':
      page = application({}, print)
      print(page[0].decode())
