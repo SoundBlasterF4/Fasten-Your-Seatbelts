@@ -1,11 +1,14 @@
 import urllib.parse as urlparse
 import mysql.connector as mariadb
+
 mariadb_connection = mariadb.connect(user='anonymous', password='corendon', database='corendon')
 cursor = mariadb_connection.cursor()
+
 try:
     cursor.execute("SELECT * FROM Passengers")
 except mariadb.Error as error:
     print("Error: {}".format(error))
+
 data = cursor.fetchall()
 
 def application(environ, start_response):
@@ -42,6 +45,7 @@ def application(environ, start_response):
     html += '<link rel="stylesheet" type="text/css" href="../html/style.css"> \n'
 
     html += str(data)
+
     html += '<title>$gatewayname Captive Portal.</title> \n'
     html += '</head> \n'
     html +=  '<body> \n'

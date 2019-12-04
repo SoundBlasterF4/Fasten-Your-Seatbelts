@@ -1,7 +1,11 @@
 import urllib.parse as urlparse
 import mysql.connector as mariadb
+
+login = None
+
 mariadb_connection = mariadb.connect(user='anonymous', password='corendon', database='corendon')
 cursor = mariadb_connection.cursor()
+
 try:
     cursor.execute("SELECT * FROM Passengers")
 except mariadb.Error as error:
@@ -42,6 +46,7 @@ def application(environ, start_response):
     html += '<link rel="stylesheet" type="text/css" href="../html/style.css"> \n'
 
     html += str(data)
+
     html += '<title>$gatewayname Captive Portal.</title> \n'
     html += '</head> \n'
     html +=  '<body> \n'
@@ -57,11 +62,15 @@ def application(environ, start_response):
     elif method == 'POST':
      input = environ['wsgi.input'].read().decode()
      params = urlparse.parse_qs(input)
+
     name = params.get('inputName')
     ticket = params.get('ticketNumber')
+
     html += str(name)
     html += str(ticket)
+
     querry = "SELECT * FROM Passengers WHERE ticketnumber=" + "'" + ''.join(ticket) + "'" +" AND " + "firstname="+ "'" +''.join(name) + "'"
+
     html += str(querry)
 
     try:
@@ -69,10 +78,20 @@ def application(environ, start_response):
      fetch = cursor.fetchall()
      count = cursor.rowcount
      html += str(count)
+
      if count == 1:
       html += 'Login Success!'
+      login = True
      else:
-      html += 'Login Fail1'
+      html += 'Login Fail!'
+      login = False
+
+     if login == True:
+        html += '<meta http-equiv="Refresh" content="2; url=succes.py" />'
+     elif login == False:
+         html += '<meta http-equiv="Refresh" content="2; url=index.py" />'
+     else:
+         html +='<a>Error</a>'
     except mariadb.Error as error:
      print("Error: {}".format(error))
 
