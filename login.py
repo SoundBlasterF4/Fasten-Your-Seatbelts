@@ -1,17 +1,17 @@
 import urllib.parse as urlparse
 import mysql.connector as mariadb
-
+#Value to set login True or False for now its empty
 login = None
-
+#Esatabilish connection with the database
 mariadb_connection = mariadb.connect(user='anonymous', password='corendon', database='corendon')
 cursor = mariadb_connection.cursor()
-
+#Try to fetch the data from the database
 try:
     cursor.execute("SELECT * FROM Passengers")
 except mariadb.Error as error:
     print("Error: {}".format(error))
-data = cursor.fetchall()
-
+data = cursor.fetchall() #Fetch
+#Start of html
 def application(environ, start_response):
     status = '200 OK'
     response_header = [('Content-type', 'text/html')]
@@ -45,7 +45,7 @@ def application(environ, start_response):
     html += '<link rel="shortcut icon" href="../html/images/splash.jpg" type="image/x-icon"> \n'
     html += '<link rel="stylesheet" type="text/css" href="../html/style.css"> \n'
 
-    html += str(data)
+    html += str(data) #Hardcoded database show
 
     html += '<title>$gatewayname Captive Portal.</title> \n'
     html += '</head> \n'
@@ -62,36 +62,36 @@ def application(environ, start_response):
     elif method == 'POST':
      input = environ['wsgi.input'].read().decode()
      params = urlparse.parse_qs(input)
-
+    #Get values of Name and ticketnmbr through the input of the html
     name = params.get('inputName')
     ticket = params.get('ticketNumber')
 
     html += str(name)
     html += str(ticket)
-
+    #Querry to match the input with the database
     querry = "SELECT * FROM Passengers WHERE ticketnumber=" + "'" + ''.join(ticket) + "'" +" AND " + "firstname="+ "'" +''.join(name) + "'"
 
     html += str(querry)
-
+    #Execute querry
     try:
      cursor.execute(querry)
      fetch = cursor.fetchall()
-     count = cursor.rowcount
+     count = cursor.rowcount #Get count value
      html += str(count)
-
+     #If value = 1 then it means its in the database, otherwise its not so it fails
      if count == 1:
       html += 'Login Success!'
-      login = True
+      login = True #Set value of login that was None
      else:
       html += 'Login Fail!'
       login = False
-
+     #If value = True then redirect to the login other wise to back to login
      if login == True:
         html += '<meta http-equiv="Refresh" content="2; url=succes.py" />'
      elif login == False:
          html += '<meta http-equiv="Refresh" content="2; url=index.py" />'
      else:
-         html +='<a>Error</a>'
+         html +='<a>Error</a>' #Give error
     except mariadb.Error as error:
      print("Error: {}".format(error))
 

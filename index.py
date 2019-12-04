@@ -1,9 +1,11 @@
 import urllib.parse as urlparse
 import mysql.connector as mariadb
 
+#Connection to database
 mariadb_connection = mariadb.connect(user='anonymous', password='corendon', database='corendon')
 cursor = mariadb_connection.cursor()
 
+#Fetch data from databse
 try:
     cursor.execute("SELECT * FROM Passengers")
 except mariadb.Error as error:
