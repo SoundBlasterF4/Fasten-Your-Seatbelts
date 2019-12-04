@@ -87,8 +87,10 @@ def application(environ, start_response):
       login = False
      #If value = True then redirect to the login other wise to back to login
      if login == True:
+         #Add iptable rule
         html += '<meta http-equiv="Refresh" content="2; url=../html/htmlPage2.html" />'
      elif login == False:
+         #Add iptable rule
          html += '<meta http-equiv="Refresh" content="2; url=index.py" />'
      else:
          html +='<a>Error</a>' #Give error
