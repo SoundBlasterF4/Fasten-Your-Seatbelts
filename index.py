@@ -96,8 +96,7 @@ def application(environ, start_response):
     html += '<div class="modal-body">\n'
     html += '<h5><b>Why can \'t I access internet? </b></h5> \n'
     html += '<h5><b>Where can I find my ticketnumber?</b></h5>\n'
-    html += '<h5><b>....</b></h5>\n'
-    html += '<h5><b>....</b></h5>\n'
+    html += '<img style="width:100%;"  src="../html/image/Ticket.png"</img> \n'
     html += '</div>\n'
 
     html += '<!-- Modal footer -->\n'
