@@ -10040,3 +10040,50 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+/*# sourceMappingURL=bootstrap.css.map */	
+.homePage {	
+	margin-left: 30px;	
+	margin-top: 20px;	
+	margin-right: 30px;	
+	border-radius: 10px;	
+	border-style: solid;	
+	border-width: 0px 0px 0px 10px;	
+	border-color: white;	
+	font-family: sans-serif;	
+	font-size: 70px;	
+	font-weight: 700;	
+	color: #d81e05;	
+	background-color: white;	
+}	
+.weerbericht {	
+	width: 400px;	
+	margin-left: 30px;	
+	margin-top: 10px;	
+	float: left;	
+}	
+.infoTabHeader {	
+	background-color: blue;	
+	margin-left: 30px;	
+	margin-top: 20px;	
+	width: 1000px;	
+	height: 30px;	
+	float: left;	
+	border-radius: 10px 10px 0px 0px;	
+	border-width: 5px;	
+	border-style: solid;	
+	border-color: blue;	
+	opacity: 60%;	
+}	
+.infoTab {	
+	background-color: blue;	
+	margin-left: 30px;	
+	width: 1000px;	
+	height: 400px;	
+	float: left;	
+	border-radius: 0px 0px 10px 10px;	
+	border-width: 10px;	
+	border-style: solid;	
+	border-color: blue;	
+	opacity: 60%;	
+}	
+
