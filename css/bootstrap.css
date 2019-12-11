@@ -557,27 +557,33 @@ pre code {
   border-radius:1em;
 }
 
-@media (min-width: 576px) {
-  .container {
-    max-width: 540px;
+@media only screen and (max-width : 768px) {
+  .container{
+    width: 100%;
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 576px) {
   .container {
-    max-width: 720px;
+    width: 540px;
+  }
+}
+
+@media(min-width: 768px) {
+  .container {
+    max-width: 40%;
   }
 }
 
 @media (min-width: 992px) {
   .container {
-    max-width: 960px;
+    max-width: 25%;
   }
 }
 
 @media (min-width: 1200px) {
   .container {
-    max-width: 1140px;
+    max-width: 25%;
   }
 }
 
