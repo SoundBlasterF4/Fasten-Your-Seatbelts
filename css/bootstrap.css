@@ -10043,55 +10043,52 @@ a.text-dark:hover, a.text-dark:focus {
 
 .homePage {
 	margin-left: 30px;
-	margin-top: 20px;
+	margin-top: 30px;
 	margin-right: 30px;
 	border-radius: 10px;
 	border-style: solid;
-	border-width: 0px 0px 0px 10px;
+	border-width: 10px 10px 10px 10px;
 	border-color: white;
 	font-family: sans-serif;
-	font-size: 70px;
+	font-size: 6vh;
 	font-weight: 700;
 	color: #d81e05;
 	background-color: white;
+	opacity: 90%;
 }
 
 .weerbericht {
-	width: 400px;
+	width: 30vw;
+	height: 40vh;
 	margin-left: 30px;
 	margin-top: 10px;
 	float: left;
 }
 
-.infoTabHeader {
-	background-color: blue;
-	margin-left: 30px;
-	margin-top: 20px;
-	width: 1000px;
-	height: 30px;
-	float: left;
-	border-radius: 10px 10px 0px 0px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: blue;
-	opacity: 60%;
-}
 
 .infoTab {
 	background-color: blue;
 	margin-left: 30px;
-	width: 1000px;
-	height: 400px;
+	margin-top: 10px;
+	width: 50vw;
+	height: 50vh;
 	float: left;
-	border-radius: 0px 0px 10px 10px;
+	border-radius: 10px 10px 10px 10px;
 	border-width: 10px;
 	border-style: solid;
 	border-color: blue;
 	opacity: 60%;
 }
 
+.infoTab h4{
+	color: white;
+	opacity: 100%;
+}
 
-
+.infoTab p{
+	color: white;
+	opacity: 100%;
+}
 
 
 
