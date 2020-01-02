@@ -1,3 +1,4 @@
+import subprocess
 import urllib.parse as urlparse
 import mysql.connector as mariadb
 #Value to set login True or False for now its empty
@@ -5,6 +6,14 @@ login = None
 #Esatabilish connection with the database
 mariadb_connection = mariadb.connect(user='anonymous', password='corendon', database='corendon')
 cursor = mariadb_connection.cursor()
+
+#Iptables rules
+subprocess.call(["iptables", "-A", "FORWARD", "-i", "wlan0", "-p", "tcp", "--dport", "53", "-j" ,"ACCEPT"])
+subprocess.call(["iptables", "-A", "FORWARD", "-i", "wlan0", "-p", "udp", "--dport", "53", "-j" ,"ACCEPT"])
+subprocess.call(["iptables", "-A", "FORWARD", "-i", "wlan0", "-p", "tcp", "--dport", str(80),"-d", "192.168.137.185", "-j" ,"ACCEPT"])
+subprocess.call(["iptables", "-A", "FORWARD", "-i", "wlan0", "-j" ,"DROP"])
+subprocess.call(["iptables", "-t", "nat", "-A", "PREROUTING", "-i", "wlan0", "-p", "tcp", "--dport", "80", "-j" ,"DNAT", "--to-destination", "192.168.137.185"":"+str(80)])
+
 #Try to fetch the data from the database
 try:
     cursor.execute("SELECT * FROM Passengers")
@@ -89,6 +98,12 @@ def application(environ, start_response):
      if count == 1:
       html += '<b style="font-type:bold; font-size: 3vh;">Login Success!</b>'
       login = True #Set value of login that was None
+      ipAddr = environ.get('REMOTE_ADDR')
+      html += str(ipAddr)
+
+      subprocess.call(["iptables","-t", "nat", "-I", "PREROUTING","1", "-s", ipAddr, "-j" ,"ACCEPT"])
+      subprocess.call(["iptables", "-I", "FORWARD", "-s", ipAddr, "-j" ,"ACCEPT"])
+
      else:
       html += 'Login Fail!'
       login = False
