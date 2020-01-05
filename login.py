@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+import sys
+import os
+import iptc
 import subprocess
 import urllib.parse as urlparse
 import mysql.connector as mariadb
@@ -8,11 +12,14 @@ mariadb_connection = mariadb.connect(user='anonymous', password='corendon', data
 cursor = mariadb_connection.cursor()
 
 #Iptables rules
-subprocess.call(["iptables", "-A", "FORWARD", "-i", "wlan0", "-p", "tcp", "--dport", "53", "-j" ,"ACCEPT"])
-subprocess.call(["iptables", "-A", "FORWARD", "-i", "wlan0", "-p", "udp", "--dport", "53", "-j" ,"ACCEPT"])
-subprocess.call(["iptables", "-A", "FORWARD", "-i", "wlan0", "-p", "tcp", "--dport", str(80),"-d", "192.168.137.185", "-j" ,"ACCEPT"])
-subprocess.call(["iptables", "-A", "FORWARD", "-i", "wlan0", "-j" ,"DROP"])
-subprocess.call(["iptables", "-t", "nat", "-A", "PREROUTING", "-i", "wlan0", "-p", "tcp", "--dport", "80", "-j" ,"DNAT", "--to-destination", "192.168.137.185"":"+str(80)])
+#os.system('pwd > out.txt')
+#subprocess.check_call(['cd /var/www/fys/wsgi/'])
+
+#subprocess.call(["sudo", "iptables", "-A", "FORWARD", "-i", "192.168.137.225", "-p", "tcp", "--dport", "53", "-j" ,"ACCEPT"])
+#subprocess.call(["sudo", "iptables", "-A", "FORWARD", "-i", "wlan0", "-p", "udp", "--dport", "53", "-j" ,"ACCEPT"])
+#subprocess.call(["sudo", "iptables", "-A", "FORWARD", "-i", "wlan0", "-p", "tcp", "--dport", str(80),"-d", "192.168.137.15", "-j" ,"ACCEPT"])
+#subprocess.call(["sudo", "iptables", "-A", "FORWARD", "-i", "wlan0", "-j" ,"DROP"])
+#subprocess.call(["sudo", "iptables", "-t", "nat", "-A", "PREROUTING", "-i", "wlan0", "-p", "tcp", "--dport", "80", "-j" ,"DNAT", "--to-destination", "192.168.137.15"":"+str(80)])
 
 #Try to fetch the data from the database
 try:
@@ -100,9 +107,14 @@ def application(environ, start_response):
       login = True #Set value of login that was None
       ipAddr = environ.get('REMOTE_ADDR')
       html += str(ipAddr)
-
-      subprocess.call(["iptables","-t", "nat", "-I", "PREROUTING","1", "-s", ipAddr, "-j" ,"ACCEPT"])
-      subprocess.call(["iptables", "-I", "FORWARD", "-s", ipAddr, "-j" ,"ACCEPT"])
+#      chain = iptc.Chain(iptc.Table(iptc.Table.NAT), "PREROUTING")
+#      rule = iptc.Rule()
+#      rule.src = ipAddr
+#      target = iptc.Target(rule, "ACCEPT")
+#      rule.target = target
+#      chain.insert_rule(rule)
+#      subprocess.call(["iptables","-t", "nat", "-I", "PREROUTING","1", "-s", ipAddr, "-j" ,"ACCEPT"])
+#      subprocess.call(["iptables", "-I", "FORWARD", "-s", ipAddr, "-j" ,"ACCEPT"])
 
      else:
       html += 'Login Fail!'
