@@ -105,19 +105,18 @@ def application(environ, start_response):
       login = False
      #If value = True then redirect to the login other wise to back to login
      if login == True:
-         #Add iptable rule
-        ipAddr = environ.get('REMOTE_ADDR')
-        html += str(ipAddr)
-        #Allow user IPTABLE
-        cmd_add_prerouting = "iptables -t nat -I PREROUTING 1 -s " + ipAddr + " -j ACCEPT"
-        cmd_add_forward = 'iptables -I FORWARD -s '+ ipAddr + ' -j ACCEPT'
-        os.system(cmd_add_prerouting)
-        os.system(cmd_add_forward)
-        os.system("sudo iptables -P FORWARD DROP")
-        html += '<meta http-equiv="Refresh" content="2; url=../html/htmlPage2.html" />'
+      #Add iptable rule
+      ipAddr = environ.get('REMOTE_ADDR')
+      html += str(ipAddr)
+      #Allow user IPTABLE
+      cmd_add_prerouting = 'sudo iptables -t nat -I PREROUTING 1 -s ' + ipAddr + ' -j ACCEPT'
+      cmd_add_forward = 'sudo iptables -I FORWARD -s '+ ipAddr + ' -j ACCEPT'
+      os.system(cmd_add_prerouting)
+      os.system(cmd_add_forward)
+      html += '<meta http-equiv="Refresh" content="2; url=../html/htmlPage2.html" />'
      elif login == False:
-         #Add iptable rule
-         html += '<meta http-equiv="Refresh" content="2; url=index.py" />'
+      #Add iptable rule
+      html += '<meta http-equiv="Refresh" content="2; url=index.py" />'
      else:
          html +='<a>Error</a>' #Give error
      html += '</div>\n'
