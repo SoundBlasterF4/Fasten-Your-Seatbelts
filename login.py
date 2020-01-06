@@ -1,7 +1,6 @@
 #!/usr/bin/python
 import sys
 import os
-import iptc
 import subprocess
 import urllib.parse as urlparse
 import mysql.connector as mariadb
@@ -12,13 +11,7 @@ mariadb_connection = mariadb.connect(user='anonymous', password='corendon', data
 cursor = mariadb_connection.cursor()
 
 #Iptables rules
-#os.system('pwd > out.txt')
-#subprocess.check_call(['./startIptables.sh'])
-#subprocess.call(["sudo", "iptables", "-A", "FORWARD", "-i", "192.168.137.225", "-p", "tcp", "--dport", "53", "-j" ,"ACCEPT"])
-#subprocess.call(["sudo", "iptables", "-A", "FORWARD", "-i", "wlan0", "-p", "udp", "--dport", "53", "-j" ,"ACCEPT"])
-#subprocess.call(["sudo", "iptables", "-A", "FORWARD", "-i", "wlan0", "-p", "tcp", "--dport", str(80),"-d", "192.168.137.15", "-j" ,"ACCEPT"])
-#subprocess.call(["sudo", "iptables", "-A", "FORWARD", "-i", "wlan0", "-j" ,"DROP"])
-#subprocess.call(["sudo", "iptables", "-t", "nat", "-A", "PREROUTING", "-i", "wlan0", "-p", "tcp", "--dport", "80", "-j" ,"DNAT", "--to-destination", "192.168.137.15"":"+str(80)])
+#os.system("cd /var/www/fys/wsgi && ./iptablesStart.sh")
 
 #Try to fetch the data from the database
 try:
@@ -80,11 +73,17 @@ def application(environ, start_response):
     #Get values of Name and ticketnmbr through the input of the html
     name = params.get('inputName')
     ticket = params.get('ticketNumber')
-    html += str(name)
-    html += str(ticket)
+#    html += str(name)
+#    html += str(ticket)
+    ticket = str(ticket)
+    ticket = ticket.replace('[', '')
+    ticket = ticket.replace(']', '')
+    name = str(name)
+    name = name.replace('[','')
+    name = name.replace(']','')
     #Querry to match the input with the database
-    querry = "SELECT * FROM Passengers WHERE ticketnumber=" + "'" + ''.join(ticket) + "'" + " AND " + "firstname=" + "'" + ''.join(name) + "'"
- #   html += str(querry)
+    querry = "SELECT * FROM Passengers WHERE ticketnumber=" + ticket + " AND firstname=" + name
+#    html += str(querry)
 
     html +=  '<!-- box containing captive portal --> \n'
     html +=  '<div class="container"> \n'
@@ -97,29 +96,24 @@ def application(environ, start_response):
      count = cursor.rowcount #Get count value
 
  #    html += str(count)
-
      #If value = 1 then it means its in the database, otherwise its not so it fails
      if count == 1:
       html += '<b style="font-type:bold; font-size: 3vh;">Login Success!</b>'
       login = True #Set value of login that was None
-      ipAddr = environ.get('REMOTE_ADDR')
-      html += str(ipAddr)
-      #Allow user IPTABLE
-      rule = iptc.Rule()
-      rule.src = ipAddr
-      rule.target = rule.create_target("ACCEPT")
-      chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "INPUT")
-      chain.insert_rule(rule)
-
-#      subprocess.call(["iptables","-t", "nat", "-I", "PREROUTING","1", "-s", ipAddr, "-j" ,"ACCEPT"])
-#      subprocess.call(["iptables", "-I", "FORWARD", "-s", ipAddr, "-j" ,"ACCEPT"])
-
      else:
       html += 'Login Fail!'
       login = False
      #If value = True then redirect to the login other wise to back to login
      if login == True:
          #Add iptable rule
+        ipAddr = environ.get('REMOTE_ADDR')
+        html += str(ipAddr)
+        #Allow user IPTABLE
+        cmd_add_prerouting = "iptables -t nat -I PREROUTING 1 -s " + ipAddr + " -j ACCEPT"
+        cmd_add_forward = 'iptables -I FORWARD -s '+ ipAddr + ' -j ACCEPT'
+        os.system(cmd_add_prerouting)
+        os.system(cmd_add_forward)
+        os.system("sudo iptables -P FORWARD DROP")
         html += '<meta http-equiv="Refresh" content="2; url=../html/htmlPage2.html" />'
      elif login == False:
          #Add iptable rule
