@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 import sys
 import os
 import iptc
@@ -13,8 +13,7 @@ cursor = mariadb_connection.cursor()
 
 #Iptables rules
 #os.system('pwd > out.txt')
-#subprocess.check_call(['cd /var/www/fys/wsgi/'])
-
+#subprocess.check_call(['./startIptables.sh'])
 #subprocess.call(["sudo", "iptables", "-A", "FORWARD", "-i", "192.168.137.225", "-p", "tcp", "--dport", "53", "-j" ,"ACCEPT"])
 #subprocess.call(["sudo", "iptables", "-A", "FORWARD", "-i", "wlan0", "-p", "udp", "--dport", "53", "-j" ,"ACCEPT"])
 #subprocess.call(["sudo", "iptables", "-A", "FORWARD", "-i", "wlan0", "-p", "tcp", "--dport", str(80),"-d", "192.168.137.15", "-j" ,"ACCEPT"])
@@ -81,12 +80,10 @@ def application(environ, start_response):
     #Get values of Name and ticketnmbr through the input of the html
     name = params.get('inputName')
     ticket = params.get('ticketNumber')
-
-  #  html += str(name)
-   # html += str(ticket)
+    html += str(name)
+    html += str(ticket)
     #Querry to match the input with the database
-    querry = "SELECT * FROM Passengers WHERE ticketnumber=" + "'" + ''.join(ticket) + "'" +" AND " + "firstname="+ "'" +''.join(name) + "'"
-
+    querry = "SELECT * FROM Passengers WHERE ticketnumber=" + "'" + ''.join(ticket) + "'" + " AND " + "firstname=" + "'" + ''.join(name) + "'"
  #   html += str(querry)
 
     html +=  '<!-- box containing captive portal --> \n'
@@ -107,12 +104,13 @@ def application(environ, start_response):
       login = True #Set value of login that was None
       ipAddr = environ.get('REMOTE_ADDR')
       html += str(ipAddr)
-#      chain = iptc.Chain(iptc.Table(iptc.Table.NAT), "PREROUTING")
-#      rule = iptc.Rule()
-#      rule.src = ipAddr
-#      target = iptc.Target(rule, "ACCEPT")
-#      rule.target = target
-#      chain.insert_rule(rule)
+      #Allow user IPTABLE
+      rule = iptc.Rule()
+      rule.src = ipAddr
+      rule.target = rule.create_target("ACCEPT")
+      chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "INPUT")
+      chain.insert_rule(rule)
+
 #      subprocess.call(["iptables","-t", "nat", "-I", "PREROUTING","1", "-s", ipAddr, "-j" ,"ACCEPT"])
 #      subprocess.call(["iptables", "-I", "FORWARD", "-s", ipAddr, "-j" ,"ACCEPT"])
 
