@@ -100,6 +100,7 @@ def application(environ, start_response):
      if count == 1:
       html += '<b style="font-type:bold; font-size: 3vh;">Login Success!</b>'
       login = True #Set value of login that was None
+
      else:
       html += 'Login Fail!'
       login = False
@@ -109,14 +110,17 @@ def application(environ, start_response):
       ipAddr = environ.get('REMOTE_ADDR')
       html += str(ipAddr)
       #Allow user IPTABLE
-      cmd_add_prerouting = 'sudo iptables -t nat -I PREROUTING 1 -s ' + ipAddr + ' -j ACCEPT'
-      cmd_add_forward = 'sudo iptables -I FORWARD -s '+ ipAddr + ' -j ACCEPT'
-      os.system(cmd_add_prerouting)
-      os.system(cmd_add_forward)
+      port80 = 'sudo iptables -t nat -I PREROUTING -i wlan0 -p tcp --dport 80 -s ' + ipAddr + ' -j ACCEPT'
+      port430 = 'sudo iptables -t nat -I PREROUTING -i wlan0 -p tcp --dport 430 -s ' + ipAddr + ' -j ACCEPT'
+      port443 = 'sudo iptables -t nat -I PREROUTING -i wlan0 -p tcp --dport 443 -s ' + ipAddr + ' -j ACCEPT'
+
+      os.system(port80)
+      os.system(port430)
+      os.system(port443)
       html += '<meta http-equiv="Refresh" content="2; url=../html/htmlPage2.html" />'
      elif login == False:
       #Add iptable rule
-      html += '<meta http-equiv="Refresh" content="2; url=index.py" />'
+      html += '<meta http-equiv="Refresh" content="2; url=index" />'
      else:
          html +='<a>Error</a>' #Give error
      html += '</div>\n'
