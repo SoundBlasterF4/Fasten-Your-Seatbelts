@@ -22,6 +22,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="script/slide.js" type="text/javascript"></script>
 <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+<script src="translate.js"></script>
 <link rel="shortcut icon" href="/images/splash.jpg" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -135,6 +136,13 @@ or appended to the query string of the authtarget link:
       </div>
     </div>
   </div>
+  <select id="country">
+            <option value="None">-- Select --</option>
+            <option value="TR">TR</option>
+            <option value="NL">NL</option>
+            <option value="EN" selected>EN</option>
+        </select>
+<button type="button" onclick="GetSelectedValue()">Get Selected Value</button>
 </body>
 
 </html>
