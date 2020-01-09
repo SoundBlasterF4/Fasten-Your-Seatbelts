@@ -22,10 +22,9 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="script/slide.js" type="text/javascript"></script>
 <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
-<script src="translate.js"></script>
 <link rel="shortcut icon" href="/images/splash.jpg" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="style.css">
-
+<script src="translate.js"></script>
 <title>$gatewayname Captive Portal.</title>
 
 <!--
@@ -82,22 +81,22 @@ or appended to the query string of the authtarget link:
   <!-- box containing captive portal -->
   <div class="container">
     <img style="margin-top:1em; " src="image/Logo_Coredon.png" width="100%">
-    <h1>Captive portal</h1>
-    <h6>Login to gain access to internet</h6>
+    <h1 id="Captive tekst">Captive portal</h1>
+    <h6 id="Login melding">Login to gain access to internet</h6>
     <!-- Login Form -->
     <form method="get" action="$authaction">
       <div class="form-group">
-        <label for="name"><b>Name:<b></label>
+        <label for="name"><b id="Naam">Name:<b></label>
         <input type="name" class="form-control" id="inputName" placeholder="Name on ticket" required>
       </div>
       <div class="form-group">
-        <label for="ticketNumber"><b>Ticket Number:<b></label>
+        <label for="ticketNumber"><b id="Ticketnummer">Ticket Number:<b></label>
         <input type="text" class="form-control" id="ticketNumber" aria-describedby="ticketHelp" placeholder="Enter ticket number" required>
         <small id="ticketHelp" class="form-text text-muted">We'll never share your info with someone else</small>
       </div>
       <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1"><small>I accept the terms and service</small></label>
+        <input type="checkbox" required class="form-check-input" id="exampleCheck1" name="checkbox_t_&_s">
+        <label class="form-check-label" for="exampleCheck1"><small id="Acceptatie">I accept the terms and service</small></label>
       </div>
       <input type="hidden" name="tok" value="$tok">
       <input type="hidden" name="redir" value="$redir">
@@ -116,21 +115,21 @@ or appended to the query string of the authtarget link:
 
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Help</h4>
+          <h4 class="modal-title" id="Help">Help</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
         <!-- Modal body -->
         <div class="modal-body">
-          <h5><b>Why can't I access internet?</b></h5>
-          <h5><b>Where can I find my ticketnumber?</b></h5>
+          <h5><b id="No internet">Why can't I access internet?</b></h5>
+          <h5><b id="Zoek ticketnummer">Where can I find my ticketnumber?</b></h5>
           <h5><b>....</b></h5>
           <h5><b>....</b></h5>
         </div>
 
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" id="Sluiten">Close</button>
         </div>
 
       </div>
@@ -142,7 +141,6 @@ or appended to the query string of the authtarget link:
             <option value="NL">NL</option>
             <option value="EN" selected>EN</option>
         </select>
-<button type="button" onclick="GetSelectedValue()">Get Selected Value</button>
+<button type="button" onclick="function()">Get Selected Value</button>
 </body>
-
 </html>
