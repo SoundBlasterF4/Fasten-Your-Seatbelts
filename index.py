@@ -67,7 +67,7 @@ def application(environ, start_response):
     html += '<div class="form-group">\n'
     html += '<label for="ticketNumber"><b>Ticket Number:<b></label>\n'
     html += '<input type="text" class="form-control" id="ticketNumber" name="ticketNumber" aria-describedby="ticketHelp" placeholder="Enter ticket number" required>\n'
-    html += '<small id="ticketHelp" class="form-text text-muted">Well never share your info with someone else </small> \n'
+    html += '<small id="ticketHelp" class="form-text text-muted">Well never share your information with someone else </small> \n'
     html += '</div>\n'
 
     html += '<div class="form-group form-check">\n'
