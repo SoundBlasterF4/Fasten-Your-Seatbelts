@@ -71,7 +71,7 @@ def application(environ, start_response):
     html += '</div>\n'
 
     html += '<div class="form-group form-check">\n'
-    html += '<input type="checkbox" class="form-check-input" id="exampleCheck1">\n'
+    html += '<input type="checkbox" required class="form-check-input" id="exampleCheck1">\n'
     html += '<label class="form-check-label" for="exampleCheck1"><small>I accept the terms and service</small></label>\n'
     html += '</div>\n'
 
