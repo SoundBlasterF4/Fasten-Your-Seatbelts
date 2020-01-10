@@ -47,8 +47,6 @@ def application(environ, start_response):
     html += '<link rel="shortcut icon" href="../html/images/splash.jpg" type="image/x-icon"> \n'
     html += '<link rel="stylesheet" type="text/css" href="../html/style.css"> \n'
 
-    html += str(data)
-
     html += '<title>Corendon Captive Portal.</title> \n'
     html += '</head> \n'
     html +=  '<body> \n'
@@ -67,11 +65,11 @@ def application(environ, start_response):
     html += '<div class="form-group">\n'
     html += '<label for="ticketNumber"><b>Ticket Number:<b></label>\n'
     html += '<input type="text" class="form-control" id="ticketNumber" name="ticketNumber" aria-describedby="ticketHelp" placeholder="Enter ticket number" required>\n'
-    html += '<small id="ticketHelp" class="form-text text-muted">Well never share your info with someone else </small> \n'
+    html += '<small id="ticketHelp" class="form-text text-muted">Corendon will never share your information with 3th partys</small> \n'
     html += '</div>\n'
 
     html += '<div class="form-group form-check">\n'
-    html += '<input type="checkbox" class="form-check-input" id="exampleCheck1">\n'
+    html += '<input type="checkbox" required class="form-check-input" id="exampleCheck1">\n'
     html += '<label class="form-check-label" for="exampleCheck1"><small>I accept the terms and service</small></label>\n'
     html += '</div>\n'
 
