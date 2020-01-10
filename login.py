@@ -77,8 +77,7 @@ def application(environ, start_response):
     name = name.replace(']','')
     #Querry to match the input with the database
     querry = "SELECT * FROM Passengers WHERE ticketnumber=" + ticket + " AND firstname=" + name
-#    html += str(querry)
-
+    
     html +=  '<!-- box containing captive portal --> \n'
     html +=  '<div class="container"> \n'
     html +=    '<img style="margin-top:1em; " src="../html/image/Logo_Coredon.png" width="100%"> \n'
