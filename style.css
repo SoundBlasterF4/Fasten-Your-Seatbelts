@@ -35,3 +35,9 @@ margin-left: 1em;
 .btnhelp:hover{
   background-color: #f12106 ;
 }
+.container p {
+  margin-top: 50%;
+  font-weight: 20%;
+  font-size: 170%;
+  text-align: center;
+}
