@@ -24,9 +24,7 @@
 <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
 <link rel="shortcut icon" href="/images/splash.jpg" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="style.css">
-<script src="translate.js"></script>
 <title>$gatewayname Captive Portal.</title>
-
 <!--
 Content:
         Nodogsplash (NDS), by default, serves this splash page (splash.html)
@@ -80,27 +78,30 @@ or appended to the query string of the authtarget link:
 <body>
   <!-- box containing captive portal -->
   <div class="container">
+    <a href="#en" data-reload>English</a>
+    <a href="#nl" data-reload>Nederlands</a>
+    <a href="#tr" data-reload>Turkçe</a>
     <img style="margin-top:1em; " src="image/Logo_Coredon.png" width="100%">
-    <h1 id="Captive tekst">Captive portal</h1>
-    <h6 id="Login melding">Login to gain access to internet</h6>
+    <h1 id="captive">Captive portal</h1>
+    <h6 id="login">Login to gain access to internet</h6>
     <!-- Login Form -->
     <form method="get" action="$authaction">
       <div class="form-group">
-        <label for="name"><b id="Naam">Name:<b></label>
+        <label for="name"><b id="naam"><a id="waardenaam">Name:</a><b></label>
         <input type="name" class="form-control" id="inputName" placeholder="Name on ticket" required>
       </div>
       <div class="form-group">
-        <label for="ticketNumber"><b id="Ticketnummer">Ticket Number:<b></label>
+        <label for="ticketNumber"><b id="ticket"><a id="waarde">Ticket Number:</a><b></label>
         <input type="text" class="form-control" id="ticketNumber" aria-describedby="ticketHelp" placeholder="Enter ticket number" required>
         <small id="ticketHelp" class="form-text text-muted">We'll never share your info with someone else</small>
       </div>
       <div class="form-group form-check">
         <input type="checkbox" required class="form-check-input" id="exampleCheck1" name="checkbox_t_&_s">
-        <label class="form-check-label" for="exampleCheck1"><small id="Acceptatie">I accept the terms and service</small></label>
+        <label class="form-check-label" for="exampleCheck1"><small id="acceptatie">I accept the terms and service</small></label>
       </div>
       <input type="hidden" name="tok" value="$tok">
       <input type="hidden" name="redir" value="$redir">
-      <input style="margin-bottom: 1em;" type="submit"  value="Continue" class="btn btn-primary">
+      <input style="margin-bottom: 1em;" type="submit" id="kak" value="Continue" class="btn btn-primary">
     </form>
   </div>
   <!-- Button to Open the Modal -->
@@ -135,12 +136,6 @@ or appended to the query string of the authtarget link:
       </div>
     </div>
   </div>
-  <select id="country">
-            <option value="None">-- Select --</option>
-            <option value="TR">TR</option>
-            <option value="NL">NL</option>
-            <option value="EN" selected>EN</option>
-        </select>
-<button type="button" onclick="function()">Get Selected Value</button>
+  <script src="translate.js"></script>
 </body>
 </html>
