@@ -10,9 +10,6 @@ login = None
 mariadb_connection = mariadb.connect(user='anonymous', password='corendon', database='corendon')
 cursor = mariadb_connection.cursor()
 
-#Iptables rules
-#os.system("cd /var/www/fys/wsgi && ./iptablesStart.sh")
-
 #Try to fetch the data from the database
 try:
     cursor.execute("SELECT * FROM Passengers")
@@ -53,8 +50,6 @@ def application(environ, start_response):
     html += '<link rel="shortcut icon" href="../html/images/splash.jpg" type="image/x-icon"> \n'
     html += '<link rel="stylesheet" type="text/css" href="../html/style.css"> \n'
 
-#    html += str(data) #Hardcoded database show
-
     html += '<title>Corendon Captive Portal.</title> \n'
     html += '</head> \n'
     html +=  '<body> \n'
@@ -73,8 +68,7 @@ def application(environ, start_response):
     #Get values of Name and ticketnmbr through the input of the html
     name = params.get('inputName')
     ticket = params.get('ticketNumber')
-#    html += str(name)
-#    html += str(ticket)
+
     ticket = str(ticket)
     ticket = ticket.replace('[', '')
     ticket = ticket.replace(']', '')
@@ -95,7 +89,6 @@ def application(environ, start_response):
      fetch = cursor.fetchall()
      count = cursor.rowcount #Get count value
 
- #    html += str(count)
      #If value = 1 then it means its in the database, otherwise its not so it fails
      if count == 1:
       html += '<b style="font-type:bold; font-size: 3vh;">Login Success!</b>'
@@ -108,7 +101,6 @@ def application(environ, start_response):
      if login == True:
       #Add iptable rule
       ipAddr = environ.get('REMOTE_ADDR')
-      html += str(ipAddr)
       #Allow user IPTABLE
       port80 = 'sudo iptables -t nat -I PREROUTING -i wlan0 -p tcp --dport 80 -s ' + ipAddr + ' -j ACCEPT'
       port430 = 'sudo iptables -t nat -I PREROUTING -i wlan0 -p tcp --dport 430 -s ' + ipAddr + ' -j ACCEPT'
