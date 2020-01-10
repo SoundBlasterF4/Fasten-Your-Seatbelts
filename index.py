@@ -1,4 +1,3 @@
-#!usr/sbin/python
 import urllib.parse as urlparse
 import mysql.connector as mariadb
 
@@ -33,7 +32,7 @@ def application(environ, start_response):
 
     html += '<head> \n'
     html += '<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> \n'
-    html += '<link rel="shorcut icon" href="../html/image/icon/favicon.ico"> \n'
+    html += '<link rel="shorcut-icon" href="../html/image/icon/favicon.ico"> \n'
     html += '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"> \n '
     html += '<meta http-equiv="Pragma" content="no-cache"> \n'
     html += '<meta http-equiv="Expires" content="0"> \n '
@@ -117,4 +116,3 @@ def application(environ, start_response):
 if __name__ == '__main__':
      page = application({}, print)
      print(page[0].decode())
-
