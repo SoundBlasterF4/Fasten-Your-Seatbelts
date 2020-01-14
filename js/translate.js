@@ -4,16 +4,16 @@ var language = {
   eng: {
     portal: "Captive Portal",
     gain: "Login to gain access to internet",
-    naam: "Name:",
+    naam: "Full name:",
     ticketval: "Ticket number:",
     terms: "Corendon will never share your information with third parties.",
     info: "I accept the terms and service"
     /*welcome: */
   },
   nl: {
-    portal: "Inlog pagina",
-    gain: "Login om toegang te krijgen tot het internet",
-    naam: "Naam",
+    portal: "Inlogpagina",
+    gain: "Log in om toegang te krijgen tot het internet",
+    naam: "Voornaam en achternaam:",
     ticketval: "Ticket nummer:",
     terms: "Corendon zal geen informatie delen met derden.",
     info: "Ik accepteer de licentie overeenkomst"
@@ -21,10 +21,10 @@ var language = {
   tr: {
     portal: "Kısıtlama portalı",
     gain: "Internet’e bağlanmak için lütfen isminizi ve soyisminizi giriniz.",
-    naam: "Ad:",
+    naam: "Adınız ve soyadınız:",
     ticketval: "Billet numarasi:",
     terms: "Corendon'un üçüncü taraflarla bilgi paylaşmayacağınin.",
-    info: "lisans sözleşmesini kabul ediyorum."
+    info: "Lisans sözleşmesini kabul ediyorum."
   }
 };
 if (window.location.hash) {
