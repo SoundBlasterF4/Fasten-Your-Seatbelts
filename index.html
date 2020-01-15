@@ -30,16 +30,20 @@
 <body>
   <!-- box containing captive portal -->
   <div class="container">
-    <a href="#en" data-reload>English</a>
-    <a href="#nl" data-reload>Nederlands</a>
-    <a href="#tr" data-reload>Turkçe</a>
+    <a>English   </a>
+    <a>Nederlands   </a>
+    <a>Turkçe   </a>
+    <div></div>
+    <a href="#en" data-reload><img style="margin-top:1em; " src="html/image/vlag-verenigd-koningrijk.png" width="18%"></a>
+    <a href="#nl" data-reload><img style="margin-top:1em; " src="html/image/nederland.png" width="18%"></a>
+    <a href="#tr" data-reload><img style="margin-top:1em; " src="html/image/vlag-turkije.png" width="18%"></a>
     <img style="margin-top:1em; " src="html/image/Logo_Coredon.png" width="100%">
     <h1 id="captive">Captive portal</h1>
-     <h6 id="login">Login to gain access to internet</h6>
+     <h6 id="login">Sign in to gain access to internet</h6>
     <!-- Login Form -->
     <form method="POST" action="login">
       <div class="form-group">
-        <label for="name"><b id="naam"><a id="waardenaam">Name:</a><b></label>
+        <label for="name"><b id="naam"><a id="waardenaam">Fullname:</a><b></label>
         <input type="name" class="form-control" id="inputName" name="inputName" placeholder="Name on ticket" required>
         <div class="form-group">
           <label for="ticketNumber"><b id="ticket"><a id="waarde">Ticket Number:</a><b></label>
@@ -48,7 +52,7 @@
         </div>
         <div class="form-group form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-          <label class="form-check-label" for="exampleCheck1"><small id="acceptatie">I accept the terms and service</small></label>
+          <label class="form-check-label" for="exampleCheck1"><small id="acceptatie">I accept the terms and services</small></label>
         </div>
         <input style="margin-bottom: 1em;" type="submit"  value="Continue" class="btn btn-primary">
         <!-- Button to Open the Modal -->
@@ -69,10 +73,7 @@
 
               <!-- Modal body -->
               <div class="modal-body">
-                <h5><b id="No internet">Why can't I access internet?</b></h5>
-                <h5><b id="Zoek ticketnummer">Where can I find my ticketnumber?</b></h5>
-                <h5><b>....</b></h5>
-                <h5><b>....</b></h5>
+                <img style="margin-top:1em; " src="html/image/Ticket.png" width="70%">
               </div>
 
               <!-- Modal footer -->
